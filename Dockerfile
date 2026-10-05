@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 RUN git clone --depth 1 --branch ${FTEQW_REF} https://github.com/fte-team/fteqw.git /src
 WORKDIR /src/engine
-RUN make sv-rel FTE_TARGET=linux64 -j"$(nproc)" \
- && cp release/fteqw-sv64 /fteqw-sv
+RUN make sv-rel -j"$(nproc)" \
+ && cp release/fteqw-sv /fteqw-sv
 
 # ---- fetch LibreQuake server data ----
 FROM debian:bookworm-slim AS data
