@@ -1,0 +1,7 @@
+FTEMANIFEST 1
+GAME librequake
+NAME "LibreQuake"
+BASEGAME id1
+BASEGAME lq1
+PACKAGE id1/lq_lite0.pak mirror "/lq_lite0.pak"
+PACKAGE id1/lq_lite1.pak mirror "/lq_lite1.pak"
