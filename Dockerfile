@@ -25,12 +25,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends zlib1g ca-certi
  && rm -rf /var/lib/apt/lists/* \
  && useradd -r -m -d /srv/quake quake
 WORKDIR /srv/quake
-COPY --from=build /fteqw-sv ./fteqw-sv
-COPY --from=data /lq1 ./lq1
-COPY config/server.cfg ./lq1/server.cfg
+COPY --from=build --chown=quake:quake /fteqw-sv ./fteqw-sv
+COPY --from=data --chown=quake:quake /lq1 ./lq1
+COPY --chown=quake:quake config/server.cfg ./lq1/server.cfg
 # manifest so FTE recognises the game without id1/pak files
-RUN printf 'FTEMANIFEST 1\nGAME librequake\nNAME "LibreQuake"\nBASEGAME lq1\n' > default.fmf
-RUN chown -R quake:quake /srv/quake
+RUN printf 'FTEMANIFEST 1\nGAME librequake\nNAME "LibreQuake"\nBASEGAME lq1\n' > default.fmf \
+ && chown quake:quake default.fmf
 USER quake
 EXPOSE 27500/udp
 # FTE dedicated auto-execs lq1/server.cfg
