@@ -1,0 +1,13 @@
+services:
+  librequake:
+    build:
+      context: .
+      args:
+        LQ_VERSION: v0.09-beta
+        FTEQW_REF: master
+    restart: unless-stopped
+    ports:
+      - "27500:27500/udp"
+    command: ["+set", "rcon_password", "${RCON_PASSWORD:?set RCON_PASSWORD in Dokploy env}"]
+    stdin_open: true
+    tty: true
